@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Etiquetas QR - Kits Derrame SST</title>
+    <title>Generador de Etiquetas QR - Extintores SST</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; color: #333; }
         h1 { text-align: center; color: #1b5e20; margin-bottom: 5px; }
@@ -22,8 +22,8 @@
 </head>
 <body>
 
-    <h1>ETIQUETAS QR - KITS DERRAME DE EMERGENCIA</h1>
-    <p class="subtitle">FALCON FARMS DE COLOMBIA S.A – FINCA TORREMOLINOS | Escanea con la cámara del celular para abrir la inspección.</p>
+    <h1>ETIQUETAS QR - CONTROL DE EXTINTORES</h1>
+    <p class="subtitle">Escanea estos códigos con la cámara del celular para abrir la ficha de inspección.</p>
 
     <div class="no-print">
         <button class="btn-print" onclick="window.print()">🖨️ Imprimir Etiquetas</button>
@@ -32,43 +32,70 @@
     <div class="grid-container" id="etiquetas-grid"></div>
 
     <script>
-        // Cambia esta URL por la ruta donde publiques la app de Kits de Derrame en GitHub Pages
-        const BASE_URL = "https://softwareproduccion0-afk.github.io/Kits-Derrame/";
+        // Enlace actualizado con el dominio de Lucerito
+        const BASE_URL = "https://softwareproduccion0-afk.github.io/Extintores/";
 
-        const masterSpillKits = [
-            { id: 1, ubicacion: "DEPOSITO DE ACPM", tipo: "Kit Derrame Emergencia" },
-            { id: 2, ubicacion: "DEPOSITO DE COMBUSTIBLE", tipo: "Kit Derrame Emergencia" },
-            { id: 3, ubicacion: "ALMACEN DE PLAGUICIDAS", tipo: "Kit Derrame Emergencia" },
-            { id: 4, ubicacion: "PREPARACION DE SOLUCIONES POSCOSECHA", tipo: "Kit Derrame Emergencia" },
-            { id: 5, ubicacion: "TALLER DE MANTENIMIENTO", tipo: "Kit Derrame Emergencia" },
-            { id: 6, ubicacion: "RESPEL", tipo: "Kit Derrame Emergencia" },
-            { id: 7, ubicacion: "ALMACEN DE FERTILIZANTES", tipo: "Kit Derrame Emergencia" },
-            { id: 8, ubicacion: "CUARTO DE MAQUINAS (UNIDAD DE DESCONTAMINACION)", tipo: "Kit Derrame Emergencia" },
-            { id: 9, ubicacion: "TRANSPORTE DE AGROQUIMICOS 1", tipo: "Kit Derrame Emergencia" },
-            { id: 10, ubicacion: "TRANSPORTE DE AGROQUIMICOS 2", tipo: "Kit Derrame Emergencia" },
-            { id: 13, ubicacion: "BOMBA MIPE 1", tipo: "Kit Derrame Emergencia" },
-            { id: 14, ubicacion: "BOMBA MIPE 2", tipo: "Kit Derrame Emergencia" },
-            { id: 15, ubicacion: "BOMBA MIPE 3", tipo: "Kit Derrame Emergencia" },
-            { id: 16, ubicacion: "BOMBA MIPE 4", tipo: "Kit Derrame Emergencia" },
-            { id: 17, ubicacion: "BOMBA MIPE 5", tipo: "Kit Derrame Emergencia" },
-            { id: 18, ubicacion: "BOMBA MIRFE 1", tipo: "Kit Derrame Emergencia" },
-            { id: 19, ubicacion: "BOMBA MIRFE 2", tipo: "Kit Derrame Emergencia" }
+        const masterExtinguishers = [
+            { id: 1, ubicacion: "Porteria", tipo: "ABC - 20 lb" },
+            { id: 2, ubicacion: "Banos Vestieres", tipo: "ABC - 20 lb" },
+            { id: 3, ubicacion: "Oficina Adm", tipo: "BC (CO2) - 10 lb" },
+            { id: 4, ubicacion: "Entrada Alm. Gen.", tipo: "ABC - 20 lb" },
+            { id: 5, ubicacion: "Entrada Alm. Plg.", tipo: "ABC - 20 lb" },
+            { id: 6, ubicacion: "Cuarto Frio N-5", tipo: "ABC - 20 lb" },
+            { id: 7, ubicacion: "Pasillo Alm. Ge. Carton", tipo: "ABC - 20 lb" },
+            { id: 8, ubicacion: "Armado de carton-piso 2", tipo: "ABC - 20 lb" },
+            { id: 9, ubicacion: "Oficina Posco", tipo: "BC (CO2) - 10 lb" },
+            { id: 10, ubicacion: "Pegado de Stickers", tipo: "ABC - 20 lb" },
+            { id: 11, ubicacion: "Escalera Poscosecha", tipo: "ABC - 20 lb" },
+            { id: 12, ubicacion: "Banos Posco", tipo: "ABC - 20 lb" },
+            { id: 13, ubicacion: "Salida emergencia N° 2", tipo: "ABC - 20 lb" },
+            { id: 14, ubicacion: "Cuarto Frio N-5", tipo: "ABC - 20 lb" },
+            { id: 15, ubicacion: "Cuarto Frio N-7", tipo: "ABC - 20 lb" },
+            { id: 16, ubicacion: "Cuarto Frio Verdes Y Despacho", tipo: "ABC - 20 lb" },
+            { id: 17, ubicacion: "Hornos", tipo: "ABC - 20 lb" },
+            { id: 18, ubicacion: "Cocina", tipo: "PQS Rodante - 2.5 gl" },
+            { id: 19, ubicacion: "Botellones de agua", tipo: "ABC - 20 lb" },
+            { id: 20, ubicacion: "Alm. Fertilizantes", tipo: "ABC - 20 lb" },
+            { id: 21, ubicacion: "Satelite Bom. Mirfe", tipo: "ABC - 150 lb" },
+            { id: 22, ubicacion: "Entrada Bom. Mirfe", tipo: "ABC - 20 lb" },
+            { id: 23, ubicacion: "Satelite en deposito de ACPM", tipo: "ABC - 150 lb" },
+            { id: 24, ubicacion: "Torre aireacion nueva", tipo: "ABC - 20 lb" },
+            { id: 25, ubicacion: "Respel", tipo: "ABC - 20 lb" },
+            { id: 26, ubicacion: "Bomba Fum. 1", tipo: "ABC - 20 lb" },
+            { id: 27, ubicacion: "Bomba Fum. 2", tipo: "ABC - 20 lb" },
+            { id: "028", ubicacion: "Comedor BQ 1", tipo: "ABC - 10 lb" },
+            { id: "029", ubicacion: "Bomba Fum. 3", tipo: "ABC - 20 lb" },
+            { id: "030", ubicacion: "Bomba Fum. 4", tipo: "ABC - 20 lb" },
+            { id: "031", ubicacion: "Bomba Fum. 5", tipo: "ABC - 30 lb" },
+            { id: "032", ubicacion: "Satelite Bloque 27", tipo: "ABC - 150 lb" },
+            { id: "033", ubicacion: "Equi. Soldadura Taller 1", tipo: "ABC - 10 lb" },
+            { id: "034", ubicacion: "Equi. Soldadura Taller 2", tipo: "ABC - 10 lb" },
+            { id: "035", ubicacion: "Equi. Soldadura Taller 3", tipo: "ABC - 10 lb" },
+            { id: "036", ubicacion: "Taller Mtto 2", tipo: "ABC - 10 lb" },
+            { id: "037", ubicacion: "Taller Mtto", tipo: "ABC - 20 lb" },
+            { id: "038", ubicacion: "Cuarto Combustibles", tipo: "ABC - 10 lb" },
+            { id: "039", ubicacion: "Recepcion", tipo: "BC (CO2) - 10 lb" },
+            { id: "040", ubicacion: "Oficina mirfe", tipo: "BC (CO2) - 10 lb" },
+            { id: "041", ubicacion: "Planta electrica", tipo: "ABC - 20 lb" },
+            { id: "042", ubicacion: "Escaleras externas cuarto armado carton", tipo: "BC (CO2) - 10 lb" },
+            { id: "043", ubicacion: "Oficina SST", tipo: "ABC - 10 lb" },
+            { id: "044", ubicacion: "Oficinas Atencion", tipo: "BC (CO2) - 10 lb" }
         ];
 
         const contenedor = document.getElementById('etiquetas-grid');
 
-        masterSpillKits.forEach(kit => {
-            const numStr = String(kit.id).padStart(3, '0');
+        masterExtinguishers.forEach(ext => {
+            const numStr = String(ext.id).padStart(3, '0');
             const enlaceWeb = `${BASE_URL}?id=${numStr}`;
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(enlaceWeb)}`;
 
             const tarjeta = document.createElement('div');
             tarjeta.className = 'etiqueta';
             tarjeta.innerHTML = `
-                <h3>KIT DERRAME #${numStr}</h3>
-                <div class="ubicacion">${kit.ubicacion}</div>
-                <img src="${qrUrl}" alt="QR Kit Derrame ${numStr}">
-                <div class="tipo">${kit.tipo}</div>
+                <h3>EXTINTOR #${numStr}</h3>
+                <div class="ubicacion">${ext.ubicacion}</div>
+                <img src="${qrUrl}" alt="QR Extintor ${numStr}">
+                <div class="tipo">${ext.tipo}</div>
             `;
             contenedor.appendChild(tarjeta);
         });
