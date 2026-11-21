@@ -266,7 +266,7 @@
                             <input type="text" id="kit-location" class="form-control" required placeholder="Ej: DEPOSITO DE ACPM">
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label fw-bold">Responsable del Área *</label>
+                            <label class="form-label fw-bold">Responsable  *</label>
                             <input type="text" id="kit-responsible" class="form-control" required placeholder="Nombre del responsable">
                         </div>
                     </div>
@@ -861,7 +861,7 @@
                             <td style="padding: 4px; width: 50%;"><strong>Estado Final:</strong> ${item.status}</td>
                         </tr>
                         <tr>
-                            <td style="padding: 4px;"><strong>Responsable del Área:</strong> ${item.responsible || 'N/A'}</td>
+                            <td style="padding: 4px;"><strong>Responsable:</strong> ${item.responsible || 'N/A'}</td>
                             <td style="padding: 4px;"><strong>Inspector SST:</strong> ${item.inspector || 'N/A'}</td>
                         </tr>
                     </table>
@@ -965,7 +965,7 @@
                 const headerRowIndex = 6;
                 const headers = [
                     "Fecha Inspección", "N° / ID Kit", "Ubicación",
-                    "Responsable Área", "Estado Final", "Inspector SST",
+                    "Responsable", "Estado Final", "Inspector SST",
                     "N° Fotos", "Firma Registrada"
                 ];
 
